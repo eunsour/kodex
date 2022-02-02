@@ -55,25 +55,32 @@ public class KodexFilterTest {
 		getKodexString("이니에스");
 		getKodexString("페르메스");
 
+		getKodexString("아웃");
 		getKodexString("아우트");
+
+		getKodexString("메소드");
+		getKodexString("매서드");
+
+		getKodexString("아벨");
 		getKodexString("애플");
+
+		getKodexString("에이서");
+		getKodexString("유저");
+		getKodexString("아시아");
 		getKodexString("은!숫!강!산!수#강#싼");
-
 	}
-
+//
 //	@Test
 //	void testOnlyHangul() throws IOException {
-//		assertEquals("elasticsearch", getKodexString("딤ㄴ샻ㄴㄷㅁㄱ초"));
+//		assertEquals("아웃", getKodexString("ㅇ3"));
 //	}
 //
 //	@Test
 //	void testContainsEnglish() throws IOException {
-//		assertEquals("google.com", getKodexString("해ㅐ힏.채ㅡ"));
+//		assertEquals("아우트", getKodexString("ㅇ3"));
 //	}
-//
-//	@Test
-//	void testContainsSpecialCharacters() throws IOException {
-//		assertEquals("elasticsearch!@#$%^&&**((", getKodexString("딤ㄴ샻ㄴㄷㅁㄱ초!@#$%^&&**(("));
-//	}
+
+
+
 
 }

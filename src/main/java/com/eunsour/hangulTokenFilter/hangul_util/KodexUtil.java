@@ -14,7 +14,7 @@ public class KodexUtil {
     private final char[] JUNGSUNG_LIST = {'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ',
             'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'};
 
-    // 종성 28개(없는 경우 - 공백 포함)
+    // 종성 28개
     private final Map<Character, Integer> JONGSUNG_MAP = new HashMap<>(28);
     private final String[] JONGSUNG_LIST = {"*", "ㄱ*", "ㄲ*", "ㄳ*", "ㄴ*", "ㄵ*", "ㄶ*", "ㄷ*", "ㄹ*", "ㄺ*", "ㄻ*",
             "ㄼ*", "ㄽ*", "ㄾ*", "ㄿ*", "ㅀ*", "ㅁ*", "ㅂ*", "ㅄ*", "ㅅ*", "ㅆ*", "ㅇ*", "ㅈ*", "ㅊ*", "ㅋ*", "ㅌ*", "ㅍ*", "ㅎ*"};
@@ -161,27 +161,27 @@ public class KodexUtil {
         for (char ch : hangulString.toCharArray()) {
             String jaso = decompose(ch);
 
-            String[] koko = jaso.split(",");
+            String[] jamo = jaso.split(",");
 
-            for (int i = 0; i < koko.length; i++) {
-                switch (koko[i]) {
+            for (int i = 0; i < jamo.length; i++) {
+                switch (jamo[i]) {
                     case " ":
                     case "*":
-                        koko[i] = "";
+                        jamo[i] = "";
                         break;
 
                     case "ㄱ":
                     case "ㄱ*":
                     case "ㄲ":
                     case "ㅋ":
-                        koko[i] = "1";
+                        jamo[i] = "1";
                         break;
 
                     case "ㄴ":
                     case "ㄴ*":
                     case "ㅇ":
                     case "ㅇ*":
-                        koko[i] = "2";
+                        jamo[i] = "2";
                         break;
 
                     case "ㄷ":
@@ -189,17 +189,17 @@ public class KodexUtil {
                     case "ㅌ":
                     case "ㅅ*":
                     case "ㅊ":
-                        koko[i] = "3";
+                        jamo[i] = "3";
                         break;
 
                     case "ㄹ":
                     case "ㄹ*":
-                        koko[i] = "4";
+                        jamo[i] = "4";
                         break;
 
                     case "ㅁ":
                     case "ㅁ*":
-                        koko[i] = "5";
+                        jamo[i] = "5";
                         break;
 
                     case "ㅂ":
@@ -207,39 +207,33 @@ public class KodexUtil {
                     case "ㅃ":
                     case "ㅍ":
                     case "ㅎ":
-                        koko[i] = "6";
+                        jamo[i] = "6";
                         break;
 
                     case "ㅅ":
                     case "ㅆ":
                     case "ㅈ":
                     case "ㅉ":
-                        koko[i] = "7";
+                        jamo[i] = "7";
                         break;
 
                     default:
-                        koko[i] = koko[i];
+                        jamo[i] = jamo[i];
                         break;
 
                 }
-                jasoBuilder.append(koko[i]);
+                jasoBuilder.append(jamo[i]);
             }
         }
+        String firstChosungStr = getFirstChosung(hangulString.toCharArray()[0]);
+        char firstChosung = firstChosungStr.charAt(0);
 
-
-        String f_chosung = firstChosung(hangulString.toCharArray()[0]);
-        char first_chosung = f_chosung.charAt(0);
-
-
-
-        return first_chosung + jasoBuilder.toString();
+        return firstChosung + jasoBuilder.toString();
     }
 
     // 첫 번째 초성
-    private String firstChosung(char hangul) {
-        if (hangul >= 'a' && hangul <= 'z')
-            return String.valueOf(Character.toUpperCase(hangul));
-        else if (hangul < '가' || hangul > '힣')
+    private String getFirstChosung(char hangul) {
+        if (hangul < '가' || hangul > '힣')
             return String.valueOf(hangul);
 
         StringBuilder jasoBuilder = new StringBuilder();
@@ -254,9 +248,7 @@ public class KodexUtil {
 
     // 한 글자 분해
     private String decompose(char hangul) {
-        if (hangul >= 'a' && hangul <= 'z')
-            return String.valueOf(Character.toUpperCase(hangul));
-        else if (hangul < '가' || hangul > '힣')
+        if (hangul < '가' || hangul > '힣')
             return String.valueOf(hangul);
 
         StringBuilder jasoBuilder = new StringBuilder();
@@ -276,9 +268,7 @@ public class KodexUtil {
         final int jongsungIndex =
                 (diff - ((JONGSUNG_MAP.size() * JUNGSUNG_MAP.size()) * chosungIndex)
                         - (JONGSUNG_MAP.size() * jungsungIndex));
-//        if (jongsungIndex > 0) {
         jasoBuilder.append(JONGSUNG_LIST[jongsungIndex] + ",");
-//        }
 
         return jasoBuilder.toString();
     }
