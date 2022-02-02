@@ -160,7 +160,6 @@ public class KodexUtil {
         StringBuilder jasoBuilder = new StringBuilder();
         for (char ch : hangulString.toCharArray()) {
             String jaso = decompose(ch);
-
             String[] jamo = jaso.split(",");
 
             for (int i = 0; i < jamo.length; i++) {
@@ -228,6 +227,9 @@ public class KodexUtil {
         String firstChosungStr = getFirstChosung(hangulString.toCharArray()[0]);
         char firstChosung = firstChosungStr.charAt(0);
 
+        if (firstChosung != 'ㅇ')
+            jasoBuilder.deleteCharAt(0);
+
         return firstChosung + jasoBuilder.toString();
     }
 
@@ -249,7 +251,7 @@ public class KodexUtil {
     // 한 글자 분해
     private String decompose(char hangul) {
         if (hangul < '가' || hangul > '힣')
-            return String.valueOf(hangul);
+            return String.valueOf(' ');
 
         StringBuilder jasoBuilder = new StringBuilder();
 

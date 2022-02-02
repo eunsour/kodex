@@ -64,23 +64,12 @@ public class KodexFilterTest {
 		getKodexString("아벨");
 		getKodexString("애플");
 
+		getKodexString("라테일");
+		getKodexString("나테일");
+
 		getKodexString("에이서");
 		getKodexString("유저");
 		getKodexString("아시아");
-		getKodexString("은!숫!강!산!수#강#싼");
+		getKodexString("숫!강!산!수#강#싼");
 	}
-//
-//	@Test
-//	void testOnlyHangul() throws IOException {
-//		assertEquals("아웃", getKodexString("ㅇ3"));
-//	}
-//
-//	@Test
-//	void testContainsEnglish() throws IOException {
-//		assertEquals("아우트", getKodexString("ㅇ3"));
-//	}
-
-
-
-
 }
