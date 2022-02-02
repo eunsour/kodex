@@ -70,6 +70,5 @@ public class KodexFilterTest {
 		getKodexString("에이서");
 		getKodexString("유저");
 		getKodexString("아시아");
-		getKodexString("숫!강!산!수#강#싼");
 	}
 }
