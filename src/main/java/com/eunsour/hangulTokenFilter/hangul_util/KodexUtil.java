@@ -251,7 +251,7 @@ public class KodexUtil {
     // 한 글자 분해
     private String decompose(char hangul) {
         if (hangul < '가' || hangul > '힣')
-            return String.valueOf(hangul);
+            return String.valueOf(' ');
 
         StringBuilder jasoBuilder = new StringBuilder();
 
