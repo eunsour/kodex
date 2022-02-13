@@ -11,8 +11,6 @@ public class KodexUtil {
 
     // 중성 21개
     private final Map<Character, Integer> JUNGSUNG_MAP = new HashMap<>(21);
-    private final char[] JUNGSUNG_LIST = {'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ',
-            'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'};
 
     // 종성 28개
     private final Map<Character, Integer> JONGSUNG_MAP = new HashMap<>(28);
