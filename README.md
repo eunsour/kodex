@@ -1,15 +1,24 @@
-# kodex
-유사 발음 검색을 위한 Kodex 한글 토큰 필터 입니다.<br>
+# Introduce
+엘라스틱 서치 한글 유사 발음 검색을 위한 Kodex 한글 토큰 필터 입니다.<br><br>
 
-# Getting started 
+# Getting started (1 or 2)
+1) Kodex 프로젝트 Clone 후 **각자의 Elasticsearch 버전에 맞게 직접 빌드**
 ```bash
 git clone https://github.com/eunsour/kodex.git
 ./gradlew clean assemble
 ```
+
+2) EFK Stack 프로젝트 Clone 후 **Dockerfile** 에 붙여넣기 (7.14.1)
+```bash
+git clone https://github.com/eunsour/docker-efk.git
+
+# elasticsearch/DockerFile
+RUN elasticsearch-plugin install https://github.com/eunsour/kodex/releases/download/7.14.1/eunsour_hangulTokenFilter-7.14.1.zip
+```
+
 <br>
 
-1. 예제
-유사발음 검색
+# Kodex Example
 ``` javascript
 # 인덱스 생성
 PUT kodex_test
@@ -41,17 +50,16 @@ PUT kodex_test
     }
   }
 }
-
-
+```
+---
+```javascript
 # kodex 애널라이저로 텍스트 분석
 GET kodex_test/_analyze
 {
   "analyzer": "kodex_analyzer",
   "text": "엘라스틱 서치"  
 }
-```
 
-```javascript
 # kodex 애널라이저로 텍스트 분석 결과
 {
   "tokens" : [
@@ -72,7 +80,7 @@ GET kodex_test/_analyze
   ]
 }
 ```
-
+---
 ```javascript
 # 예제 데이터 색인
 POST /_bulk
@@ -100,8 +108,9 @@ POST /_bulk
 { "name" : "유저" }
 { "index" : { "_index" : "kodex_test", "_id" : "12" } }
 { "name" : "아시아" }
-
-
+```
+---
+```javascript
 # 예제 텍스트 검색 
 GET kodex_test/_search
 {
@@ -117,9 +126,7 @@ GET kodex_test/_search
     }
   }
 }
-```
 
-```javascript
 # 검색 결과
 {
   "took" : 0,
